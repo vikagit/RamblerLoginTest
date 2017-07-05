@@ -21,7 +21,7 @@ public class RegistrationTest extends JUnitTestBase {
   public void initPageObjects() {
     page = PageFactory.initElements(driver, RegistrationPage.class);
     driver.get(baseUrl+"/account/registration");
-
+    driver.manage().timeouts().setScriptTimeout(40, TimeUnit.SECONDS);
   }
 
   @Test // Проверяем, что поле Почтовый ящик пустое

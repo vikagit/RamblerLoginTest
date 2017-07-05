@@ -23,29 +23,17 @@ public class MailTest extends JUnitTestBase {
   public void initPageObjects() {
     page = PageFactory.initElements(driver, AuthPage.class);
     driver.get("https://id.rambler.ru/login-20/?#login");
-    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    driver.manage().timeouts().setScriptTimeout(40, TimeUnit.SECONDS);
   }
 
   @Test // Авторизуемся
   public void testEmailStringOfSpaces() {
     driver.manage().timeouts().pageLoadTimeout(2,TimeUnit.SECONDS);
-    page.emailField.sendKeys("test145029@");
+    page.emailField.sendKeys("test145029");
     page.passwordField.sendKeys("123pass");
 
-   // wait.until(new ExpectedCondition<Boolean>() {
-     //            private int i = 0;
-     //            public Boolean apply(WebDriver driver) {
-      //             WebElement elm = driver.findElement(By.name("login"));
-      //             System.out.println("->"+i);
-      //             i++;
-      //             return i>20;
-      //           }});
-
-    //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    //driver.manage().timeouts().setScriptTimeout(10,TimeUnit.SECONDS);
-
-  //  page.submitButton.click();
-    ((JavascriptExecutor) driver).executeScript("setTimeout(function(){document.getElementById('myCheck').click()}, 5000);");
+    ((JavascriptExecutor) driver).executeScript("setTimeout(function(){document.evaluate('//button[@type=\"submit\"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()}, 5000);");
 
     waitForLoad(driver,"https://id.rambler.ru/login-20/?#login");
     System.out.println(driver.getCurrentUrl());
