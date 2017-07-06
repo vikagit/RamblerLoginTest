@@ -22,22 +22,26 @@ public class MailTest extends JUnitTestBase {
   @BeforeEach
   public void initPageObjects() {
     page = PageFactory.initElements(driver, AuthPage.class);
-    driver.get("https://id.rambler.ru/login-20/?#login");
+    driver.get("https://mail.rambler.ru");
     //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     driver.manage().timeouts().setScriptTimeout(40, TimeUnit.SECONDS);
   }
 
   @Test // Авторизуемся
   public void testEmailStringOfSpaces() {
-    driver.manage().timeouts().pageLoadTimeout(2,TimeUnit.SECONDS);
+    //driver.manage().timeouts().pageLoadTimeout(2,TimeUnit.SECONDS);
     page.emailField.sendKeys("test145029");
     page.passwordField.sendKeys("123pass");
 
     ((JavascriptExecutor) driver).executeScript("setTimeout(function(){document.evaluate('//button[@type=\"submit\"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()}, 5000);");
 
-    waitForLoad(driver,"https://id.rambler.ru/login-20/?#login");
+    waitForLoad(driver,"https://mail.rambler.ru/");
     System.out.println(driver.getCurrentUrl());
-    Assertions.assertEquals(driver.getCurrentUrl(),"https://id.rambler.ru/account/#profile");
+
+    MailPage page;
+    page = PageFactory.initElements(driver, MailPage.class);
+    System.out.println(page.inboxFolder.getAttribute("title"));
+    Assertions.assertEquals(page.inboxFolder.getAttribute("title"), "Писем нет");
   }
 
   public void waitForLoad(WebDriver driver,String initpage) {
@@ -51,10 +55,4 @@ public class MailTest extends JUnitTestBase {
     wait.until(pageLoadCondition);
   }
 
- /* @Test // Проверяем на какой сейчас странице находимся
-  public void testCurrentURL(){
-    System.out.println(driver.getCurrentUrl());
-    Assertions.assertEquals(driver.getCurrentUrl(),"https://id.rambler.ru/login-20/?#login");
-
-  }*/
 }
