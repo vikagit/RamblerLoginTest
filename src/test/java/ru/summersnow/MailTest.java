@@ -14,10 +14,11 @@ import ru.summersnow.pages.RegistrationPage;
 
 import java.util.concurrent.TimeUnit;
 
+// Класс проверки почты на наличие новых писем
+//////////////////////////////////////////////
 public class MailTest extends JUnitTestBase {
 
   private AuthPage page;
-
 
   @BeforeEach
   public void initPageObjects() {
@@ -28,7 +29,7 @@ public class MailTest extends JUnitTestBase {
   }
 
   @Test // Авторизуемся
-  public void testEmailStringOfSpaces() {
+  public void testNewMail() {
     //driver.manage().timeouts().pageLoadTimeout(2,TimeUnit.SECONDS);
     page.emailField.sendKeys("test145029");
     page.passwordField.sendKeys("123pass");

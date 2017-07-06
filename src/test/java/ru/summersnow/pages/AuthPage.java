@@ -5,7 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
+//Описание страницы почтовой аутентификации
+///////////////////////////////////////////
 public class AuthPage extends Page{
 
     @FindBy(how = How.ID_OR_NAME, using = "login") //поле Почтовый ящик
