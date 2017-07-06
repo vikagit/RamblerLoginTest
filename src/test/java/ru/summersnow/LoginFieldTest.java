@@ -59,7 +59,11 @@ public class LoginFieldTest extends JUnitTestBase {
     page.submitButton.submit();
     System.out.println("Запрет Email-а из двух букв");
     System.out.println(page.emailErrMsg.getText());
-    Assertions.assertEquals(page.emailErrMsg.getText(),"Логин должен быть от 3 до 31 символов");
+
+    try{
+      Assertions.assertNotEquals(page.emailErrMsg.getText(),"");
+    }catch (NoSuchElementException e)
+    { Assertions.assertFalse(true);}
   }
 
   @Test //LF003 Проверяем, что поле Почтовый ящик не позволяет логин из 32 букв
@@ -82,7 +86,11 @@ public class LoginFieldTest extends JUnitTestBase {
     page.emailField.sendKeys("67");
     page.submitButton.submit();
     System.out.println("Запрет Логина из 2 цифр");
-    Assertions.assertEquals(page.emailErrMsg.getText(),"Недопустимый логин");
+
+    try{
+      Assertions.assertEquals(page.emailErrMsg.getText(),"Недопустимый логин");
+    }catch (NoSuchElementException e)
+    { Assertions.assertFalse(true);}
   }
 
   @Test //LF006 Проверяем, что поле Почтовый ящик не позволяет логин из 32 цифр
@@ -156,14 +164,18 @@ public class LoginFieldTest extends JUnitTestBase {
     page.emailField.sendKeys("ff6");
     page.submitButton.submit();
     System.out.println("Email из 3 символов");
-    Assertions.assertEquals(page.emailErrMsg.getText(),"Недопустимый логин");
+    try{
+      Assertions.assertNotEquals(page.emailErrMsg.getText(),"");
+    }catch (NoSuchElementException e)
+    { Assertions.assertFalse(true);}
+
   }
   @Test // LF016 Проверяем, что Логин может состоять из 31 разрешенного символа
   public void testEmail31Symbols(){
     page.emailField.sendKeys("23hgjkldfg654hbntukdp65gvhfryui");
     page.submitButton.submit();
     System.out.println("Логин из 31 буквы разрешен");
-    Assertions.assertEquals(page.emailErrMsg.getText(),"Недопустимый логин");
+    Assertions.assertEquals(page.emailErrMsg.getText(),"Логин должен быть от 3 до 31 символов");
   }
 
   @Test // LF017 Проверяем, что Логин может состоять из 10 разрешенных символов
@@ -171,7 +183,7 @@ public class LoginFieldTest extends JUnitTestBase {
     page.emailField.sendKeys("12gh45jh78");
     page.submitButton.submit();
     System.out.println(" Email из 10 символов");
-    boolean exists = driver.findElements( By.xpath("//input[@id=\"login.username\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]")).size() != 0;
+    boolean exists = driver.findElements( By.xpath("//input[@id=\"login.username\"]/../../../../div[@class=\"message-3980010542\"]")).size() != 0;
     Assertions.assertFalse(exists);
   }
 
@@ -188,7 +200,7 @@ public class LoginFieldTest extends JUnitTestBase {
     page.emailField.sendKeys("23hgjkldfg654hbntukdp65gvhfryu");
     page.submitButton.submit();
     System.out.println("Логин из 30 букв разрешен");
-    Assertions.assertEquals(page.emailErrMsg.getText(),"Недопустимый логин");
+    Assertions.assertEquals(page.emailErrMsg.getText(),"Логин должен быть от 3 до 31 символов");
   }
 
   @Test // Проверяем на какой сейчас странице находимся

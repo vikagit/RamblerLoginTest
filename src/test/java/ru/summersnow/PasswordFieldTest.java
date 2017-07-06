@@ -32,7 +32,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("r");
     page.submitButton.submit();
     System.out.println("Запрет пароля из одной буквы");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Пароль должен содержать от 6 до 32 символов");
   }
 
   @Test //PF002 Проверяем, что  Пароль не может состоять из 2 символов
@@ -40,7 +40,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("r");
     page.submitButton.submit();
     System.out.println("Запрет пароля из 2 символов");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Пароль должен содержать от 6 до 32 символов");
   }
 
   @Test //PF003 Проверяем, что Пароль не может состоять из 33 символов
@@ -48,7 +48,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("1234_67890123gfssdd-67890123tyuio");
     page.submitButton.submit();
     System.out.println("Запрет пароля из 33 символов");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Пароль должен содержать от 6 до 32 символов");
   }
 
   @Test //PF004 Проверяем, что Пароль не может состоять из 1 цифры
@@ -56,7 +56,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("7");
     page.submitButton.submit();
     System.out.println("Запрет пароля из одной цифры");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Пароль должен содержать от 6 до 32 символов");
   }
 
   @Test //PF005 Пароль не может состоять из 2 цифр
@@ -64,7 +64,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("37");
     page.submitButton.submit();
     System.out.println("Запрет пароля из двух цифр");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Пароль должен содержать от 6 до 32 символов");
   }
 
   @Test //PF006 Пароль не может состоять из 33 цифр
@@ -72,7 +72,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("123456789012345678901234567890123");
     page.submitButton.submit();
     System.out.println("Запрет пароля из 33 цифр");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Пароль должен содержать от 6 до 32 символов");
   }
 
   @Test //PF007 Пароль может состоять из строки сложной комбинации спецсимволов, некоторые из которых присутствуют в SQL, HTML, JS: “[|]’~< !--@/*$%^&#*/()?>,.*/\
@@ -80,7 +80,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("“[|]’~< !--@/*$%^&#*/()?>,.*/\\");
     page.submitButton.submit();
     System.out.println("Запрет пароля из сложной комбинации спецсимволов");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Символ \"“\" не поддерживается. Можно использовать символы ! @ $ % ^ & * ( ) _ - +");
   }
 
   @Test //PF008 Пароль не может состоять из строки пробелов
@@ -88,7 +88,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("     ");
     page.submitButton.submit();
     System.out.println("Запрет пароля из пробелов");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Символ \" \" не поддерживается. Можно использовать символы ! @ $ % ^ & * ( ) _ - +");
   }
 
   @Test //PF009 Нельзя ввести Пароль начинающийся с пробела
@@ -96,7 +96,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("_5hrdg");
     page.submitButton.submit();
     System.out.println("Запрет пароля начинающегося с пробела");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Пароль средней сложности");
   }
 
   @Test //PF0010  Нельзя ввести Пароль заканчивающийся пробелом
@@ -104,7 +104,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("5hrdg ");
     page.submitButton.submit();
     System.out.println("Запрет пароля заканчивающегося на пробел");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Символ \" \" не поддерживается. Можно использовать символы ! @ $ % ^ & * ( ) _ - +");
   }
 
   @Test //PF0011  Пароль может состоять из 6 разрешенных символов
@@ -112,7 +112,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("5hrdgt");
     page.submitButton.submit();
     System.out.println("Пароль из 6 разрешенных символов ");
-    boolean exists = driver.findElements( By.xpath("//input[@id=\"password.main\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]")).size() != 0;
+    boolean exists = driver.findElements( By.xpath("//input[@name=\"password.main\"]/../../../div[@class=\"message-3980010542\"]")).size() != 0;
   }
 
   @Test //PF0012  Пароль не может состоять из 32 разрешенных символов
@@ -120,7 +120,7 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("ptlrkei8gk_tu-tue.dlwp95kdjfiru5");
     page.submitButton.submit();
     System.out.println("Пароль из 32 разрешенных символов ");
-    Assertions.assertEquals(page.passwordErrMsg.getText(),"Недопустимый пароль");
+    Assertions.assertEquals(page.passwordErrMsg.getText(),"Символ \".\" не поддерживается. Можно использовать символы ! @ $ % ^ & * ( ) _ - +");
   }
 
   @Test //PF0013  Пароль может состоять из 10 разрешенных символов
@@ -128,8 +128,9 @@ public class PasswordFieldTest extends JUnitTestBase {
     page.passwordField.sendKeys("ptlrkei8gk");
     page.submitButton.submit();
     System.out.println("Пароль из 10 разрешенных символов ");
-    boolean exists = driver.findElements( By.xpath("//input[@id=\"password.main\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]")).size() != 0;
-    Assertions.assertFalse(exists);
+    Assertions.assertNotEquals(page.passwordErrMsg.getText(),"Пароль должен содержать от 6 до 32 символов");
+    //boolean exists = driver.findElements( By.xpath("//input[@name=\"password.main\"]/../../../div[@class=\"message-3980010542\"]")).size() != 0;
+    //Assertions.assertFalse(exists);
   }
 
 

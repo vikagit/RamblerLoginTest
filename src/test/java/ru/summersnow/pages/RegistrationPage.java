@@ -27,10 +27,10 @@ public class RegistrationPage extends Page{
     @CacheLookup
     public WebElement emailField;
 
-    @FindBy(how = How.XPATH,using = "//input[@id=\"login.username\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]") //сообщение об ошибке поля Почтовый ящик
+    @FindBy(how = How.XPATH,using = "//input[@name=\"login.username\"]/../../../../div[@class=\"message-3980010542\"]") //сообщение об ошибке поля Почтовый ящик
     public WebElement emailErrMsg;
 
-    @FindBy(how = How.XPATH,using = "//input[@id=\"password.main\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]") //сообщение об ошибке поля Пароль
+    @FindBy(how = How.XPATH,using = "//input[@name=\"password.main\"]/../../../div[@class=\"message-3980010542\"]") //сообщение об ошибке поля Пароль
     public WebElement passwordErrMsg;
 
     @FindBy(how = How.ID_OR_NAME, using = "password.main") //поле Пароль
