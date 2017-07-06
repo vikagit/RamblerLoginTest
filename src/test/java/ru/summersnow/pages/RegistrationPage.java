@@ -30,7 +30,7 @@ public class RegistrationPage extends Page{
     @FindBy(how = How.XPATH,using = "//input[@id=\"login.username\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]") //сообщение об ошибке поля Почтовый ящик
     public WebElement emailErrMsg;
 
-    @FindBy(how = How.XPATH,using = "//input[@id=\"password.main\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]") //сообщение об ошибке поля Почтовый ящик
+    @FindBy(how = How.XPATH,using = "//input[@id=\"password.main\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]") //сообщение об ошибке поля Пароль
     public WebElement passwordErrMsg;
 
     @FindBy(how = How.ID_OR_NAME, using = "password.main") //поле Пароль

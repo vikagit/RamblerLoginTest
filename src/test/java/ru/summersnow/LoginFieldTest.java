@@ -170,8 +170,9 @@ public class LoginFieldTest extends JUnitTestBase {
   public void testEmail10Symbols(){
     page.emailField.sendKeys("12gh45jh78");
     page.submitButton.submit();
-    System.out.println("Запрет Email из пробелов");
-    Assertions.assertEquals(page.emailErrMsg.getText(),"Недопустимый логин");
+    System.out.println(" Email из 10 символов");
+    boolean exists = driver.findElements( By.xpath("//input[@id=\"login.username\"]/../../../div[@class=\"src-components-Status-styles--message--cGbII\"]")).size() != 0;
+    Assertions.assertFalse(exists);
   }
 
   @Test // LF018 Проверяем, что поле Почтовый ящик не позволяет кириллицу
